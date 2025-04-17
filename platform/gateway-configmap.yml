@@ -45,22 +45,22 @@ data:
               add_header X-Frame-Options "SAMEORIGIN";
 
               ##### casual games ### START ###########
-              location /play/onetfruitclassic/ { proxy_pass http://kyrgyzstan-game-onetfruitclassic.k8s-dev.kar-tel.local/; }
-              location /play/sumosaga/ { proxy_pass http://kyrgyzstan-game-sumosaga.k8s-dev.kar-tel.local; }
-              location /play/hexa-merge/ { proxy_pass http://kyrgyzstan-game-hexa-merge.k8s-dev.kar-tel.local/; }
-              location /play/zoomerge/ { proxy_pass http://kyrgyzstan-game-zoomerge.k8s-dev.kar-tel.local/; }
-              location /play/crossychicken/ { proxy_pass http://kyrgyzstan-game-crossychicken.k8s-dev.kar-tel.local/; }
-              location /play/marbles/ { proxy_pass http://kyrgyzstan-game-marbles.k8s-dev.kar-tel.local/; }
-              location /play/racing/ { proxy_pass http://kyrgyzstan-racing-kg.k8s-dev.kar-tel.local/; }
+              location /play/onetfruitclassic/ { proxy_pass http://kyrgyzstan-game-onetfruitclassic-test.beeline.kg/; }
+              location /play/sumosaga/ { proxy_pass http://kyrgyzstan-game-sumosaga-test.beeline.kg; }
+              location /play/hexa-merge/ { proxy_pass http://kyrgyzstan-game-hexa-merge-test.beeline.kg/; }
+              location /play/zoomerge/ { proxy_pass http://kyrgyzstan-game-zoomerge-test.beeline.kg/; }
+              location /play/crossychicken/ { proxy_pass http://kyrgyzstan-game-crossychicken-test.beeline.kg/; }
+              location /play/marbles/ { proxy_pass http://kyrgyzstan-game-marbles-test.beeline.kg/; }
+              location /play/racing/ { proxy_pass http://kyrgyzstan-racing-kg-test.beeline.kg/; }
 
               location /play/jewel-match/ {
 
                 set $lang ru;
-                set $target_url http://kyrgyzstan-jewel-match-kyrgyzstan-ru.k8s-dev.kar-tel.local;
+                set $target_url http://kyrgyzstan-jewel-match-kyrgyzstan-ru-test.beeline.kg;
 
                 if ($args ~ "(^|&)lang=kg(&|$)") {
                     set $lang kg;
-                    set $target_url http://kyrgyzstan-jewel-match-kyrgyzstan.k8s-dev.kar-tel.local;
+                    set $target_url http://kyrgyzstan-jewel-match-kyrgyzstan-test.beeline.kg;
                 }
 
                 rewrite ^/play/jewel-match/(.*)$ /$1 break;
@@ -85,7 +85,7 @@ data:
 
           ##### roulette2024 #### START ##########
           location /play/roulette2024 {
-              location /play/roulette2024/api/ { proxy_pass http://kyrgyzstan-game-platform-backend.k8s-dev.kar-tel.local/api/; }
+              location /play/roulette2024/api/ { proxy_pass http://kyrgyzstan-game-platform-backend-test.beeline.kg/api/; }
               location /play/roulette2024 {
                 proxy_pass https://kyrgyzstan-roulette-v3.k8s-dev.beeline.kz/;
                 add_header Content-Security-Policy "*";
@@ -95,7 +95,7 @@ data:
 
           ##### game-platform ###### START ##########
           location /wofscript/ {
-              proxy_pass http://wofscript.k8s-dev.kar-tel.local/;
+              proxy_pass http://wofscript-test.beeline.kg/;
           }
 
             location /sdk/ {
@@ -107,7 +107,7 @@ data:
             }
 
             location /quiz-admin/api/ {
-                proxy_pass http://admin-quizzes.k8s-dev.kar-tel.local/quiz-admin/;
+                proxy_pass http://admin-quizzes-test.beeline.kg/quiz-admin/;
             }
 
             location / {
