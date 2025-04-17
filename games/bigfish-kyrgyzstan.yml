@@ -1,0 +1,97 @@
+# Source: application-deploy/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: bigfish-kyrgyzstan
+  namespace: game-platform-kg
+  labels:
+    app: bigfish-kyrgyzstan
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: bigfish-kyrgyzstan
+---
+# Source: application-deploy/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bigfish-kyrgyzstan
+  namespace: game-platform-kg
+  labels:
+    app: bigfish-kyrgyzstan
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 50%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: bigfish-kyrgyzstan
+  template:
+    metadata:
+      labels:
+        app: bigfish-kyrgyzstan
+    spec:
+      imagePullSecrets:
+      - name: docker-registry-pull
+      containers:
+      - name: bigfish-kyrgyzstan
+        image: "harbor-game.beeline.kg/web-view-games/bigfish-kyrgyzstan:test-1173503" # {"$imagepolicy": "flux-system:game-platform-kg.bigfish-kyrgyzstan"}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        resources:
+          limits:
+            memory: 1024Mi
+          requests:
+            memory: 700Mi
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - bigfish-kyrgyzstan
+              topologyKey: failure-domain.beta.kubernetes.io/zone
+            weight: 100
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - bigfish-kyrgyzstan
+            topologyKey: kubernetes.io/hostname
+---
+# Source: application-deploy/templates/ingress.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  creationTimestamp: null
+  name: bigfish-kyrgyzstan
+  namespace: game-platform-kg
+spec:
+  entryPoints: []
+  routes:
+  - kind: Rule
+    match: Host(`kyrgyzstan-bigfish-kyrgyzstan-test.beeline.kg`) && PathPrefix(`/`)
+    priority: 0
+    services:
+    - kind: Service
+      name: bigfish-kyrgyzstan
+      namespace: game-platform-kg
+      port: 8080

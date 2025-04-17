@@ -1,0 +1,38 @@
+global:
+  storageClass: longhorn
+
+architecture: replication
+
+auth:
+  enabled: true
+  password: L5cE1u3OD8
+
+master:
+  persistence:
+    enabled: true
+    storageClass: longhorn
+    size: 8Gi
+
+replica:
+  persistence:
+    enabled: true
+    storageClass: longhorn
+    size: 8Gi
+
+sentinel:
+  enabled: true
+  persistence:
+    enabled: true
+    storageClass: longhorn
+    size: 8Gi
+
+metrics:
+  enabled: true
+
+resources:
+  limits:
+    cpu: 250m
+    memory: 1024Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi

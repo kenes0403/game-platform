@@ -1,0 +1,104 @@
+# Source: application-deploy/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: game-platform-kg
+  labels:
+    app: frontend
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 50%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      imagePullSecrets:
+      - name: docker-registry-pull
+      containers:
+      - name: frontend
+        image: "harbor-game.beeline.kg/game-platform/platform-frontend:skymobile-dev-1186778" # {"$imagepolicy": "flux-system:game-platform-kg.platform-frontend"}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        resources:
+          limits:
+            memory: 1024Mi
+          requests:
+            memory: 700Mi
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - frontend
+              topologyKey: failure-domain.beta.kubernetes.io/zone
+            weight: 100
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - frontend
+            topologyKey: kubernetes.io/hostname
+---
+# Source: application-deploy/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: game-platform-kg
+  labels:
+    app: frontend
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: frontend
+---
+# Source: application-deploy/templates/ingress.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  name: frontend
+  namespace: game-platform-kg
+spec:
+  entryPoints: []
+  routes:
+  - kind: Rule
+    match: Host(`kyrgyzstan-game-platform-front-test.beeline.kg`) && PathPrefix(`/`)
+    priority: 0
+    services:
+    - kind: Service
+      name: frontend
+      namespace: game-platform-kg
+      port: 8080
+  - kind: Rule
+    match: Host(`kyrgyzstan-game-platform-front-test.beeline.kg`) && PathPrefix(`/api`)
+    priority: 0
+    services:
+    - kind: Service
+      name: backend
+      namespace: game-platform-kg
+      port: 8080
