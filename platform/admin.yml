@@ -76,7 +76,7 @@ spec:
     app: admin
 ---
 # Source: application-deploy/templates/ingress.yaml
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   annotations:
