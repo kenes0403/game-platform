@@ -106,5 +106,5 @@ spec:
       name: gateway
       namespace: game-platform-kg
       port: 8080
-    tls:
+  tls:
     secretName: beeline-kg
