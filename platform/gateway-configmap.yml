@@ -51,7 +51,7 @@ data:
               location /play/zoomerge/ { proxy_pass http://game-zoomerge.game-platform-kg.svc.cluster.local:8080/; }
               location /play/crossychicken/ { proxy_pass http://game-crossychicken.game-platform-kg.svc.cluster.local:8080/; }
               location /play/marbles/ { proxy_pass http://game-marbles.game-platform-kg.svc.cluster.local:8080/; }
-              location /play/racing/ { proxy_pass http://game-racing-kg.game-platform-kg.svc.cluster.local:8080/; }
+              location /play/racing/ { proxy_pass http://racing-kg.game-platform-kg.svc.cluster.local:8080/; }
 
               location /play/jewel-match/ {
 
