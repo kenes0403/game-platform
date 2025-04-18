@@ -2,10 +2,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gateway
+  name: admin
   namespace: game-platform-kg
   labels:
-    app: gateway
+    app: admin
 spec:
   replicas: 1
   strategy:
@@ -15,41 +15,27 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: gateway
+      app: admin
   template:
     metadata:
       labels:
-        app: gateway
+        app: admin
     spec:
       imagePullSecrets:
       - name: docker-registry-pull
-      volumes:
-      - name: gateway-config
-        configMap:
-          name: gateway
       containers:
-      - name: gateway
-        image: "harbor-game.beeline.kg/qazcode-export/game-platform/gateway:dev-1184295"
+      - name: admin
+        image: "harbor-game.beeline.kg/game-platform/game-admin:skymobile-test-1188531" # {"$imagepolicy": "flux-system:game-platform-kg.game-admin"}
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 8080
-          name: http
+        - name: http
+          containerPort: 8080
           protocol: TCP
         resources:
           limits:
-            memory: 256Mi
+            memory: 1024Mi
           requests:
-            memory: 128Mi
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        envFrom:
-        - configMapRef:
-            name: gateway
-            optional: true
-        volumeMounts:
-        - mountPath: /etc/nginx/conf.d/default.conf
-          name: gateway-config
-          subPath: default.conf
+            memory: 700Mi
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -59,7 +45,7 @@ spec:
                 - key: app
                   operator: In
                   values:
-                  - gateway
+                  - admin
               topologyKey: failure-domain.beta.kubernetes.io/zone
             weight: 100
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -68,16 +54,17 @@ spec:
               - key: app
                 operator: In
                 values:
-                - gateway
+                - admin
             topologyKey: kubernetes.io/hostname
 ---
+# Source: application-deploy/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: gateway
+  name: admin
   namespace: game-platform-kg
   labels:
-    app: gateway
+    app: admin
 spec:
   type: ClusterIP
   ports:
@@ -86,25 +73,32 @@ spec:
     protocol: TCP
     name: http
   selector:
-    app: gateway
+    app: admin
 ---
-apiVersion: traefik.io/v1alpha1
+# Source: application-deploy/templates/ingress.yaml
+apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   annotations:
     kubernetes.io/ingress.class: traefik
-  name: gateway
+  name: admin
   namespace: game-platform-kg
 spec:
   entryPoints: []
   routes:
   - kind: Rule
-    match: Host(`gaming-test.beeline.kg`) && PathPrefix(`/`)
+    match: Host(`kyrgyzstan-game-platform-admin-test.beeline.kg`) && PathPrefix(`/`)
     priority: 0
     services:
     - kind: Service
-      name: gateway
+      name: admin
       namespace: game-platform-kg
       port: 8080
-    tls:
-    secretName: beeline-kg
+  - kind: Rule
+    match: Host(`kyrgyzstan-game-platform-admin-test.beeline.kg`) && PathPrefix(`/api`)
+    priority: 0
+    services:
+    - kind: Service
+      name: backend
+      namespace: game-platform-kg
+      port: 8080
