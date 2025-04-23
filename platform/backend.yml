@@ -25,7 +25,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: backend
-        image: "harbor-game.beeline.kg/qazcode-export/game-platform/platform-backend:dev-1184289" # {"$imagepolicy": "flux-system:game-platform-kg.platform-backend"}
+        image: "harbor-game.beeline.kg/qazcode-export/game-platform/platform-backend:test-1192346" # {"$imagepolicy": "flux-system:game-platform-kg.platform-backend"}
         imagePullPolicy: IfNotPresent
         env:
         - name: "SERVER_PORT"
