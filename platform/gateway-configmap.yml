@@ -102,13 +102,13 @@ data:
                 proxy_pass http://sdk.game-platform-kg.svc.cluster.local:8080/;
             }
 
-            location /admin/ {
-                proxy_pass http://admin.game-platform-kg.svc.cluster.local:8080/;
-            }
+            # location /admin/ {
+            #     proxy_pass http://admin.game-platform-kg.svc.cluster.local:8080/;
+            # }
 
-            location /admin/api/ {
-                proxy_pass http://backend.game-platform-kg.svc.cluster.local:8080/api/;
-            }
+            # location /admin/api/ {
+            #     proxy_pass http://backend.game-platform-kg.svc.cluster.local:8080/api/;
+            # }
 
             location /api/ {
                 proxy_pass http://backend.game-platform-kg.svc.cluster.local:8080/api/;
