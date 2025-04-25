@@ -96,7 +96,7 @@ spec:
       namespace: game-platform-kg
       port: 8080
   - kind: Rule
-    match: Host(`gaming-test.beeline.kg`) && PathPrefix(`/api`)
+    match: Host(`gaming-test.beeline.kg`) && PathPrefix(`/admin/api`)
     priority: 0
     services:
     - kind: Service
