@@ -84,10 +84,11 @@ metadata:
   name: admin
   namespace: game-platform-kg
 spec:
-  entryPoints: []
+  entryPoints:
+    - websecure
   routes:
   - kind: Rule
-    match: Host(`gaming-test.beeline.kg`) && PathPrefix(`/`)
+    match: Host(`gaming-test.beeline.kg`) && PathPrefix(`/admin`)
     priority: 0
     services:
     - kind: Service
@@ -102,3 +103,5 @@ spec:
       name: backend
       namespace: game-platform-kg
       port: 8080
+  tls:
+    secretName: beeline-kg
