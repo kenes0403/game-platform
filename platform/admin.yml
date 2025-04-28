@@ -84,11 +84,10 @@ metadata:
   name: admin
   namespace: game-platform-kg
 spec:
-  entryPoints:
-    - websecure
+  entryPoints: []
   routes:
   - kind: Rule
-    match: Host(`gaming-test.beeline.kg`) && PathPrefix(`/admin`)
+    match: Host(`game-platform-admin-test.beeline.kg`) && PathPrefix(`/`)
     priority: 0
     services:
     - kind: Service
@@ -96,7 +95,7 @@ spec:
       namespace: game-platform-kg
       port: 8080
   - kind: Rule
-    match: Host(`gaming-test.beeline.kg`) && PathPrefix(`/admin/api`)
+    match: Host(`gaming-test.beeline.kg`) && PathPrefix(`/api`)
     priority: 0
     services:
     - kind: Service
