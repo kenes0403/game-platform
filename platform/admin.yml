@@ -102,5 +102,5 @@ spec:
       name: backend
       namespace: game-platform-kg
       port: 8080
-  # tls:
-  #   secretName: beeline-kg
+  tls:
+    secretName: beeline-kg
