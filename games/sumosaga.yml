@@ -43,7 +43,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: game-sumosaga
-        image: "harbor-game.beeline.kg/web-view-games/sumo-2-kg:test-1173787" # {"$imagepolicy": "flux-system:game-platform-kg.sumo-2-kg"}
+        image: "harbor-game.beeline.kg/web-view-games/sumo-2-kg:test-1208017" # {"$imagepolicy": "flux-system:game-platform-kg.sumo-2-kg"}
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

@@ -43,7 +43,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: jewel-match-kyrgyzstan
-        image: "harbor-game.beeline.kg/web-view-games/jewel-match-kyrgyzstan:test-1173782" # {"$imagepolicy": "flux-system:game-platform-kg.jewel-match-kyrgyzstan"}
+        image: "harbor-game.beeline.kg/web-view-games/jewel-match-kyrgyzstan:test-1208010" # {"$imagepolicy": "flux-system:game-platform-kg.jewel-match-kyrgyzstan"}
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

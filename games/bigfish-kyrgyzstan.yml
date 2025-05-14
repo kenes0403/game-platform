@@ -43,7 +43,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: bigfish-kyrgyzstan
-        image: "harbor-game.beeline.kg/web-view-games/bigfish-kyrgyzstan:test-1173503" # {"$imagepolicy": "flux-system:game-platform-kg.bigfish-kyrgyzstan"}
+        image: "harbor-game.beeline.kg/web-view-games/bigfish-kyrgyzstan:test-1207987" # {"$imagepolicy": "flux-system:game-platform-kg.bigfish-kyrgyzstan"}
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

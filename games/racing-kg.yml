@@ -43,7 +43,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: racing-kg
-        image: "harbor-game.beeline.kg/web-view-games/racing-kg:test-1173785" # {"$imagepolicy": "flux-system:game-platform-kg.racing-kg"}
+        image: "harbor-game.beeline.kg/web-view-games/racing-kg:test-1208013" # {"$imagepolicy": "flux-system:game-platform-kg.racing-kg"}
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

@@ -43,7 +43,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: baige3d-kyrgyzstan
-        image: "harbor-game.beeline.kg/web-view-games/baige3d-kyrgyzstan:test-1173780" # {"$imagepolicy": "flux-system:game-platform-kg.baige3d-kyrgyzstan"}
+        image: "harbor-game.beeline.kg/web-view-games/baige3d-kyrgyzstan:test-1207989" # {"$imagepolicy": "flux-system:game-platform-kg.baige3d-kyrgyzstan"}
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

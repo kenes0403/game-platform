@@ -43,7 +43,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: game-hexa-merge
-        image: "harbor-game.beeline.kg/web-view-games/hexa-merge-kg:test-1173788" # {"$imagepolicy": "flux-system:game-platform-kg.hexa-merge-kg"}
+        image: "harbor-game.beeline.kg/web-view-games/hexa-merge-kg:test-1208020" # {"$imagepolicy": "flux-system:game-platform-kg.hexa-merge-kg"}
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

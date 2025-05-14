@@ -43,7 +43,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: game-zoomerge
-        image: "harbor-game.beeline.kg/web-view-games/zoomerge-kg:test-1173789" # {"$imagepolicy": "flux-system:game-platform-kg.zoomerge-kg"}
+        image: "harbor-game.beeline.kg/web-view-games/zoomerge-kg:test-1208022" # {"$imagepolicy": "flux-system:game-platform-kg.zoomerge-kg"}
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
