@@ -43,7 +43,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: game-onetfruitclassic
-        image: "harbor-game.beeline.kg/web-view-games/onetfruitclassic-kg:test-1208015" # {"$imagepolicy": "flux-system:game-platform-kg.onetfruitclassic-kg"}
+        image: "harbor-game.beeline.kg/web-view-games/onetfruitclassic-kg:test-1211062" # {"$imagepolicy": "flux-system:game-platform-kg.onetfruitclassic-kg"}
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
