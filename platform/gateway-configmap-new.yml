@@ -58,8 +58,15 @@ data:
           #     proxy_pass http://wofscript.game-platform-kg.svc.cluster.local/;
           # }
      
-            location /sdk/ { 
-                proxy_pass http://sdk.game-platform-kg.svc.cluster.local:8080/;
+            location /sdk/ {
+                location /sdk/assets/ { 
+                    add_header Cache-Control "max-age: 31536000";
+                    proxy_pass http://sdk.game-platform-kg.svc.cluster.local:8080/assets/;
+                }
+                location /sdk/ {
+                    add_header Cache-Control "no-store";
+                    proxy_pass http://sdk.game-platform-kg.svc.cluster.local:8080/;
+                }
             }
      
             location /api/ { 

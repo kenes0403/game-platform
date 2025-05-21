@@ -43,7 +43,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: sdk
-        image: "harbor-game.beeline.kg/game-platform/platform-sdk:skymobile-test-1188463"
+        image: "harbor-game.beeline.kg/game-platform/platform-sdk:skymobile-test-1213739"
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
