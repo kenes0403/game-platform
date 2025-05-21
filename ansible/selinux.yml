@@ -1,0 +1,25 @@
+---
+- name: Disable SELinux
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure SELinux is disabled in the configuration file
+      lineinfile:
+        path: /etc/selinux/config
+        regexp: '^SELINUX='
+        line: 'SELINUX=disabled'
+        state: present
+
+    - name: Temporarily disable SELinux
+      command: setenforce 0
+      when: ansible_selinux.status == "enabled"
+
+    - name: Verify the SELinux mode is disabled
+      shell: sestatus | grep "SELinux status"
+      register: selinux_status
+
+    - name: Reboot the system if SELinux is not fully disabled
+      reboot:
+        msg: "Rebooting to apply SELinux changes"
+      when: '"disabled" not in selinux_status.stdout'
+

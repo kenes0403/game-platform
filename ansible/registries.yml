@@ -1,0 +1,10 @@
+mirrors:
+  harbor-game.beeline.kg:
+    endpoint:
+      - "https://harbor-game.beeline.kg"
+
+configs:
+  "harbor-game.beeline.kg":
+    tls:
+      insecure_skip_verify: true
+

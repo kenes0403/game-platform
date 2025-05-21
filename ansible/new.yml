@@ -1,0 +1,39 @@
+---
+- name: Update NO_PROXY to include *.game.beeline.kg
+  hosts: all
+  become: true
+
+  vars:
+    new_domains: "*.game.beeline.kg"
+    environment_file: /etc/environment
+
+  tasks:
+
+    - name: Remove duplicate no_proxy line
+      lineinfile:
+        path: "{{ environment_file }}"
+        regexp: '^no_proxy='
+        state: absent
+
+    - name: Read current NO_PROXY value
+      shell: grep '^export NO_PROXY=' {{ environment_file }} | cut -d'"' -f2
+      register: current_no_proxy
+      changed_when: false
+      ignore_errors: true
+
+    - name: Set updated NO_PROXY line
+      set_fact:
+        updated_no_proxy: >-
+          {{
+            (current_no_proxy.stdout.split(',') + [new_domains])
+            | map('trim')
+            | unique
+            | join(',')
+          }}
+
+    - name: Update NO_PROXY line
+      lineinfile:
+        path: "{{ environment_file }}"
+        regexp: '^export NO_PROXY='
+        line: 'export NO_PROXY="{{ updated_no_proxy }}"'
+        state: present

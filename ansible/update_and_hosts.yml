@@ -1,0 +1,24 @@
+- name: Update packages and configure /etc/hosts
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update all packages
+      dnf:
+        name: "*"
+        state: latest
+
+    - name: Add entries to /etc/hosts
+      blockinfile:
+        path: /etc/hosts
+        block: |
+          # k8s cluster
+          10.16.230.43 bi-mybeectrl
+          10.16.230.60 bi-mybeework01
+          10.16.230.113 bi-mybeework02
+          10.16.230.115 bi-mybeework03
+          10.16.230.209 bi-mybeework04
+          10.16.230.223 bi-mybeework05
+          
+          10.16.230.248 bi-mybeedb02 # PostgreSQL
+          10.16.230.225 bi-mybeereg  # Harbor
+        marker: "# {mark} Ansible managed block"

@@ -1,0 +1,507 @@
+    1  sudo cat /etc/os-release 
+    2  ssh-keygen -t rsa -b 4096
+    3  ssh-copy-id ansible@10.16.230.60
+    4  ssh 10.16.230.60
+    5  ssh-copy-id ansible@10.16.230.113
+    6  ssh ansible@10.16.230.115
+    7  ssh 10.16.230.113
+    8  ssh-copy-id ansible@10.16.230.209
+    9  ls -l
+   10  cd rke/
+   11  ls -l
+   12  cd rke2-dev/
+   13  cd ansible/
+   14  ls -l
+   15  ansible-playbook -i inventory.yaml playbook.yaml -b
+   16  cd rke/
+   17  cd rke2-dev/
+   18  ls -l
+   19  cd ansible/
+   20  ls -l
+   21  ansible-playbook -i inventory.yaml playbook.yaml -b > output.log 2>&1
+   22  cat output.log 
+   23  ls -l
+   24  > output.log 
+   25  ansible-playbook -i inventory.yaml playbook.yaml -b 2>&1 | tee output.log
+   26  cat output.log 
+   27  > output.log 
+   28  ls -l
+   29  history 
+   30  nohup ansible-playbook -i inventory.yaml playbook.yaml -b > output.log 2>&1 &
+   31  tail -fn 100 output.log 
+   32  ls -l
+   33  cd rke/
+   34  ls -l
+   35  cd rke2-dev/
+   36  ls -l
+   37  cd ansible/
+   38  ls -l
+   39  tail -fn 100 output.log 
+   40  ls -l
+   41  vim inventory.yaml 
+   42  nohup ansible-playbook -i inventory.yaml playbook.yaml -b
+   43  ansible-playbook -i inventory.yaml playbook.yaml -b
+   44  cd rke/rke2-dev/
+   45  ls -l
+   46  cd ansible/
+   47  ls -l
+   48  ansible-playbook -i inventory.yaml playbook.yaml -b
+   49  ls -l
+   50  > output.log 
+   51  nohup ansible-playbook -i inventory.yaml playbook.yaml -b > output.log 2>&1 &
+   52  ls -l
+   53  cat nohup.out 
+   54  rm -rf nohup.out 
+   55  cd rke/
+   56  ls -l
+   57  cd rke2-dev/
+   58  ls -l
+   59  cd ansible/
+   60  ls -l
+   61  tail -fn 100 output.log 
+   62  tail -fn 200 output.log 
+   63  tail -n 100 output.log 
+   64  tail -n 400 output.log 
+   65  cat output.log 
+   66  env
+   67  ssh bi-mybeeworker01
+   68  ssh bi-mybeework01
+   69  ssh bi-mybeework02
+   70  ssh bi-mybeework03
+   71  ssh bi-mybeework04
+   72  ssh bi-mybeework05
+   73  cd rke/rke2-dev/ansible/
+   74  ls -l
+   75  ansible-playbook -i inventory.yaml playbook.yaml -b
+   76  clear
+   77  ls -l
+   78  cd rke/
+   79  ls -l
+   80  cd rke2-dev/
+   81  ls -l
+   82  cd ansible/
+   83  ls -l
+   84  cp playbook.yaml playbook.yaml2
+   85  vim playbook.yaml
+   86  nano playbook.yaml
+   87  vim playbook.yaml
+   88  sudo su -
+   89  cd rke/
+   90  ls -l
+   91  cd rke2-dev/
+   92  ls -l
+   93  cd ansible/
+   94  ls -l
+   95  tail -fn 100 output.log 
+   96  ls -l
+   97  cd /tmp/
+   98  ls -l
+   99  ssh bi-mybeework01
+  100  ssh bi-mybeework02
+  101  ssh bi-mybeework03
+  102  ssh bi-mybeework04
+  103  ssh bi-mybeework05
+  104  cd rke/rke2-dev/
+  105  ls -l
+  106  cd ansible/
+  107  ls -l
+  108  > output.log 
+  109  nohup ansible-playbook -i inventory.yaml playbook.yaml -b > output.log 2>&1 &
+  110  tail -fn 100 output.log 
+  111  cd rke/
+  112  ls -l
+  113  cd rke2-dev/
+  114  ls -l
+  115  cd ansible/
+  116  ls -l
+  117  tail -fn 100 output.log 
+  118  ls -l
+  119  tail -fn 100 output.log 
+  120  cd rke/rke2-dev/
+  121  cd ansible/
+  122  ls -l
+  123  tail -fn 100 output.log 
+  124  ls -l
+  125  nano selinux.yml
+  126  ansible-playbook -i inventory selinux.yml
+  127  ansible-playbook -i inventory -m shell -a "getenforce"
+  128  ansible-playbook -i inventory all -m shell -a "getenforce"
+  129  ansible -i inventory all -m shell -a "getenforce"
+  130  ansible -i inventory all -m shell -a "uptime"
+  131  ssh 10.16.230.225
+  132  ssh 10.16.230.223
+  133  ssh 10.16.230.248
+  134  ansible -i inventory all -m shell -a "systemctl stop firewalld"
+  135  ansible -i inventory all -m shell -a "systemctl stop firewalld" -b
+  136  ansible -i inventory all -m shell -a "systemctl disable firewalld" -b
+  137  ansible -i inventory all -m shell -a "sh /usr/local/bin/rke2-uninstall.sh" -b
+  138  nohup ansible-playbook -i inventory.yaml playbook.yaml -b > output.log 2>&1 &
+  139  tail -fn 100 output.log 
+  140  cd rke/rke2-dev/
+  141  ls -l
+  142  cd ansible/
+  143  ls -l
+  144  nohup ansible-playbook -i inventory.yaml playbook.yaml -b > output.log 2>&1 &
+  145  tail -fn 100 output.log 
+  146  ls -
+  147  ls -l
+  148  cd rke/
+  149  ls -l
+  150  cd rke2-dev/
+  151  ls -l
+  152  cd ansible/
+  153  ls -l
+  154  vim inventory.yaml 
+  155  cd ~
+  156  ansible -i inventory all -m shell -a "sh /usr/local/bin/rke2-uninstall.sh" -b
+  157  cd rke/rke2-dev/
+  158  ls -l
+  159  cd ansible/
+  160  ls -l
+  161  > output.log 
+  162  vim inventory.yaml 
+  163  nohup ansible-playbook -i inventory.yaml playbook.yaml -b > output.log 2>&1 &
+  164  tail -fn 100 output.log 
+  165  ls -l
+  166  rm -rf output.log 
+  167  cd rke/
+  168  ls -l
+  169  cd longhorn/
+  170  ls -l
+  171  cd rke/
+  172  ls -l
+  173  cd traefik/
+  174  ls -l
+  175  ssh 10.16.230.113
+  176  ssh 10.16.230.113'
+  177  ssh 10.16.230.113
+  178  ssh 10.16.230.225
+  179  ls -l
+  180  cd rke/
+  181  ls -l
+  182  cd rke2-dev/
+  183  ls -l
+  184  cd ansible/
+  185  ls -l
+  186  history 
+  187  ls -l
+  188  vim playbook.yaml
+  189  ls -l
+  190  cd roles/
+  191  ls -l
+  192  cd ..
+  193  ls -l
+  194  cd manifests/
+  195  ls -l
+  196  vim registries.yaml.j2 
+  197  cat registries.yaml.j2 
+  198  vim registries.yaml.j2 
+  199  ls -l
+  200  cd ..
+  201  cd rke/
+  202  ls- l
+  203  ls -l
+  204  cd rke2-dev/
+  205  ls -l
+  206  cd ansible/
+  207  ls -l
+  208  > output.log 
+  209  cat inventory.yaml 
+  210  ls -l
+  211  nohup ansible-playbook -i inventory.yaml playbook.yaml -b > output.log 2>&1 &
+  212  tail -fn 100 output.log 
+  213  ssh bi-mybeework02
+  214  ls -l
+  215  cat inventory 
+  216  ansible -m ping -i inventory
+  217  ls -l
+  218  ansible all -m ping -i inventory
+  219  clear
+  220  clear
+  221  sudo su -
+  222  ls -l
+  223  cd rke/
+  224  ls -l
+  225  cd rke2-dev/
+  226  ls -l
+  227  cd ansible/
+  228  ls -l
+  229  tail -fn 100 output.log 
+  230  pwd
+  231  ls -l
+  232  cat inventory.yaml 
+  233  cd ..
+  234  ls -l
+  235  cd ..
+  236  ls -l
+  237  cd ..
+  238  ls -l
+  239  cat inventory 
+  240  pwd
+  241  cd rke/rke2-dev/ansible/
+  242  ls -l
+  243  tail -fn 100 output.log 
+  244  ls -l
+  245  ssh 10.16.230.225
+  246  ssh 10.16.230.113
+  247  ssh 10.16.230.60
+  248  ssh 10.16.230.115
+  249  ssh 10.16.230.209
+  250  ssh 10.16.230.223
+  251  cd rke/rke2-dev/ansible/
+  252  ls- l
+  253  ls -l
+  254  tail -n 100 output.log 
+  255  ls -l
+  256  cd ..
+  257  ls -l
+  258  cd ..
+  259  ls -l
+  260  ansible -i inventory all -m shell -a "sh /usr/local/bin/rke2-uninstall.sh" -b
+  261  ansible all -m ping -i inventory
+  262  cd rke/rke2-dev/ansible/
+  263  ls -l
+  264  cat playbook.yaml2 
+  265  ls -l
+  266  grep -iRI 10.42.0.0/16
+  267  grep -iRI 10.42.0.0
+  268  ls -l
+  269  cd manifests/
+  270  ls -l
+  271  cd ..
+  272  ls -l
+  273  cd roles/
+  274  ls -l
+  275  cd ..
+  276  ls -l
+  277  vim playbook.yaml
+  278  ls -l
+  279  cd ..
+  280  ls -l
+  281  cd ..
+  282  ls -l
+  283  cat README.md 
+  284  ls -l
+  285  cd traefik/
+  286  ls -l
+  287  vim values.yaml 
+  288  grep -iRI 10.42.0.0
+  289  ls -l
+  290  grep -iRI 10.42.0.0
+  291  cd ..
+  292  ls -l
+  293  cd ..
+  294  ls -l
+  295  grep -iRI 10.42.0.0
+  296  grep -iRI 10.42.0.0/16
+  297  grep -iRI cluster_cidr
+  298  cd rke/rke2-dev/ansible/
+  299  ls -l
+  300  vim inventory.yaml 
+  301  nohup ansible-playbook -i inventory.yaml playbook.yaml -b > output.log 2>&1 &
+  302  tail -n 100 output.log 
+  303  tail -fn 100 output.log 
+  304  cd rke/rke2-dev/ansible/
+  305  tail -fn 100 output.log 
+  306  ls -l
+  307  cd rke/
+  308  ls -l
+  309  cd rke2-dev/
+  310  ls -l
+  311  cd ansible/
+  312  tail -fn 100 output.log 
+  313  cd ~
+  314  ansible -i inventory all -m shell -a "sh /usr/local/bin/rke2-uninstall.sh" -b
+  315  cd rke/rke2-dev/
+  316  ls -l
+  317  cd ansible/
+  318  ls -l
+  319  vim inventory.yaml 
+  320  ls -l
+  321  vim playbook.yaml
+  322  ls -l
+  323  cd roles/
+  324  ls -l
+  325  cd ansible-role-rke2/
+  326  ls -l
+  327  cd ..
+  328  ls -l
+  329  vim playbook.yaml
+  330  cat playbook.yaml2 
+  331  vim playbook.yaml
+  332  nohup ansible-playbook -i inventory.yaml playbook.yaml -b > output.log 2>&1 &
+  333  tail -fn 100 output.log 
+  334  vim playbook.yaml
+  335  tail -fn 100 output.log 
+  336  cat playbook.yaml
+  337  ls -l
+  338  vim requirements.yaml 
+  339  vim playbook.yaml
+  340  vim requirements.yaml 
+  341  nohup ansible-playbook -i inventory.yaml playbook.yaml -b > output.log 2>&1 &
+  342  tail -fn 100 output.log 
+  343  ansible -i inventory all -m shell -a "sh /usr/local/bin/rke2-uninstall.sh" -b
+  344  cd rke/rke2-dev/
+  345  ls -l
+  346  cd ansible/
+  347  ls -l
+  348  vim inventory.yaml 
+  349  ls -l
+  350  cat requirements.yaml 
+  351  vim playbook.yaml
+  352  ls -l
+  353  vim inventory.yaml 
+  354  ls -l
+  355  vim playbook.yaml
+  356  vim inventory.yaml 
+  357  nohup ansible-playbook -i inventory.yaml playbook.yaml -b > output.log 2>&1 &
+  358  tail -fn 100 output.log 
+  359  cd rke/rke2-dev/
+  360  ls -l
+  361  cd ansible/
+  362  ls -l
+  363  vim inventory.yaml 
+  364  cd ~
+  365  ansible -i inventory all -m shell -a "sh /usr/local/bin/rke2-uninstall.sh" -b
+  366  ls -l
+  367  cd rke/rke2-dev/
+  368  ls -l
+  369  cd ansible/
+  370  ls -l
+  371  vim inventory.yaml 
+  372  clear
+  373  ls -l
+  374  cd roles/ansible-role-rke2/
+  375  cd defaults/
+  376  ls -l
+  377  vim main.yml 
+  378  cd ..
+  379  ls -l
+  380  cd ..
+  381  ls -l
+  382  cd ..
+  383  ls -l
+  384  cat requirements.yaml 
+  385  ansible-galaxy list
+  386  [200~ansible-galaxy install -r requirements.yml
+  387  ansible-galaxy install -r requirements.yaml
+  388  ls -l
+  389  vim inventory.yaml 
+  390  ls -l
+  391  mv roles/ roles_old
+  392  ls -l
+  393  cp ~/.ansible/roles/ansible-role-rke2/ ./
+  394  cp -r ~/.ansible/roles/ansible-role-rke2/ ./
+  395  ls -l
+  396  cat playbook.yaml
+  397  ls -l
+  398  cat playbook.yaml
+  399  cat requirements.yaml 
+  400  ls -l
+  401  cd roles_old/
+  402  ls -l
+  403  cd ..
+  404  mkdir roles
+  405  mv ansible-role-rke2/ roles
+  406  ls -l
+  407  cd roles
+  408  ls -l
+  409  cd ..
+  410  nohup ansible-playbook -i inventory.yaml playbook.yaml -b > output.log 2>&1 &
+  411  tail -fn 100 output.log 
+  412  ls -l
+  413  ansible -i inventory all -m shell -a "sh /usr/local/bin/rke2-uninstall.sh" -b
+  414  cd rke/rke2-dev/ansible/
+  415  ls -l
+  416  vim inventory.yaml 
+  417  ls -l
+  418  vim playbook.yaml
+  419  nohup ansible-playbook -i inventory.yaml playbook.yaml -b > output.log 2>&1 &
+  420  tail -fn 100 output.log 
+  421  ls -l
+  422  cd rke/
+  423  ls -l
+  424  cat README.md 
+  425  clear
+  426  ssh bi-mybeework01
+  427  ssh bi-mybeework02
+  428  ssh bi-mybeework03
+  429  ssh bi-mybeework04
+  430  ssh bi-mybeework05
+  431  ls -l
+  432  cp inventory inventory_all
+  433  vim inventory
+  434  vim registry.yml
+  435  ls -l
+  436  vim inventory
+  437  ls -l
+  438  ansible-playbook -i inventory registry.yml 
+  439  ls- l
+  440  ls -l
+  441  vim inventory
+  442  vim registry.yml
+  443  ansible-playbook -i inventory registry.yml 
+  444  sudo su -
+  445  vim registry.yml
+  446  ansible-playbook -i inventory registry.yml 
+  447  vim registry.yml
+  448  ansible-playbook -i inventory registry.yml 
+  449  vim registry.yml
+  450  ansible-playbook -i inventory registry.yml 
+  451  ssh bi-mybeework01
+  452  ansible-playbook -i inventory registry.yml 
+  453  cd rke/rke2-dev/
+  454  ls -l
+  455  cd ansible/
+  456  ls -l
+  457  vim playbook.yaml
+  458  ansible-playbook -i inventory.yaml playbook.yaml -b
+  459  vim playbook.yaml
+  460  cd ~
+  461  ansible-playbook -i inventory registry.yml 
+  462  ssh 10.16.230.248
+  463  ls -l
+  464  cat registry.yml 
+  465  cat /etc/rancher/rke2/registries.yml 
+  466  ls -l
+  467  cat registry.yml 
+  468  ls -l
+  469  cat selinux.yml 
+  470  cat /etc/os-release 
+  471  no_proxy=*game.beeling.kg ansible all -i inventory_all -m ping
+  472  ansible all -i inventory_all -m shell -a 'unset http_proxy https_proxy ftp_proxy' -b
+  473  ansible all -i inventory_all -m shell -a 'unset HTTP_PROXY HTTPS_PROXY FTP_PROXY' -b
+  474  ls -l
+  475  vim noproxy.yml
+  476  nano noproxy.yml
+  477  ansible-playbook all -i inventory_all noproxy.yml
+  478  ansible-playbook all -i inventory_all noproxy.yml -b
+  479  ansible-playbook -i inventory_all noproxy.yml -b
+  480  ssh 10.16.230.248
+  481  ls -l
+  482  cat inventory_all 
+  483  env
+  484  ls -l
+  485  vim new.yml
+  486  nano new.yml
+  487  ansible-playbook -i inventory_all new.yml -b
+  488  ssh 10.16.230.248
+  489  cat init-skymobile.sql 
+  490  ssh bi-mybeework01
+  491  ssh 10.16.230.248
+  492  ls -l
+  493  scp beeline-kg.* 10.16.230.225
+  494  scp beeline-kg.* 10.16.230.225:
+  495  ssh 10.16.230.225
+  496  ssh 10.16.230.248
+  497  ls -l
+  498  cd rke/
+  499  ls -l
+  500  cd ..
+  501  ls -l
+  502  rm t 
+  503  ls -l
+  504  cat new.yml 
+  505  ls -l
+  506  history 
+  507  history > history.txt

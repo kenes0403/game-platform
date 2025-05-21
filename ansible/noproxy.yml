@@ -1,0 +1,16 @@
+- name: Add *.game.beeline.kg to no_proxy
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure no_proxy updated in /etc/environment
+      lineinfile:
+        path: /etc/environment
+        regexp: '^no_proxy='
+        line: "{{ new_no_proxy }}"
+        create: yes
+      vars:
+        existing_no_proxy: "{{ lookup('file', '/etc/environment') | regex_search('^no_proxy=(.*)', '\\1') | default('') }}"
+        no_proxy_domains: "*.game.beeline.kg"
+        merged_no_proxy: >-
+          {{ (existing_no_proxy.split(',') + [no_proxy_domains]) | map('trim') | unique | join(',') }}
+        new_no_proxy: "no_proxy={{ merged_no_proxy }}"
