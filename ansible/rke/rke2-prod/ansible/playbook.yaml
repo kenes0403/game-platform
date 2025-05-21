@@ -1,0 +1,68 @@
+- hosts: rke
+  pre_tasks:
+    - name: Add environment variables master
+      blockinfile:
+        path: /etc/sysconfig/rke2-server
+        state: present
+        create: yes
+        block: |
+          HTTP_PROXY=http://10.16.195.94:8080/
+          HTTPS_PROXY=http://10.16.195.94:8080/
+          NO_PROXY=harbor-game.beeline.kg,localhost,127.*,172.28.*,192.168.*,*.local,10.43.0.1,10.16.230.48,10.16.230.78,10.16.230.1,10.16.230.42,10.16.230.44,10.16.230.45,10.16.230.46,10.16.230.47,192.168.0.0/17,192.168.128.0/17
+      tags: proxy-add
+ 
+    - name: Add environment variables worker
+      blockinfile:
+        path: /etc/sysconfig/rke2-agent
+        state: present
+        create: yes
+        block: |
+          HTTP_PROXY=http://10.16.195.94:8080/
+          HTTPS_PROXY=http://10.16.195.94:8080/
+          NO_PROXY=harbor-game.beeline.kg,localhost,127.*,172.28.*,192.168.*,*.local,10.43.0.1,10.16.230.48,10.16.230.78,10.16.230.1,10.16.230.42,10.16.230.44,10.16.230.45,10.16.230.46,10.16.230.47,192.168.0.0/17,192.168.128.0/17
+      tags: proxy-add 
+
+    - name: "Add proxy server"
+      blockinfile:
+        path: /etc/environment
+        state: present
+        create: yes
+        block: |
+          export HTTP_PROXY="10.16.195.94:8080"
+          export HTTPS_PROXY="10.16.195.94:8080"
+          export NO_PROXY="harbor-game.beeline.kg,localhost,127.*,172.28.*,192.168.*,*.local,10.43.0.1,10.16.230.48,10.16.230.78,10.16.230.1,10.16.230.42,10.16.230.44,10.16.230.45,10.16.230.46,10.16.230.47,192.168.0.0/17,192.168.128.0/17"
+    - name: "Add proxy server YUM CONF"
+      blockinfile:
+        path: /etc/yum.conf
+        state: present
+        create: yes
+        block: |
+          proxy=http://10.16.195.94:8080
+
+    - name: "Make sure an entry in /etc/hosts exists"
+      lineinfile:
+        path: /etc/hosts
+        regexp: "^{{ ansible_default_ipv4.address }}"
+        line: "{{ ansible_default_ipv4.address }} {{ inventory_hostname }} {{ ansible_hostname }}"
+        state: present
+      tags: hostname
+
+    - name: "Install utils longhorn"
+      yum:
+        name:
+          - iscsi-initiator-utils
+          - nfs-utils
+          - epel-release
+          - bash-completion
+        state: present
+      tags: longhorn-utils
+
+    - name: "Start and enable iscsid service"
+      systemd:
+        name: iscsid
+        state: started
+        enabled: true
+      tags: iscsid
+
+    roles:
+      - ansible-role-rke2

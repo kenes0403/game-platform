@@ -1,0 +1,30 @@
+# registries.yaml.j2
+
+# Required by Kubernetes to download images
+containerd_insecure_registries:
+  docker.io:
+    - harbor-game.beeline.kg
+
+containerd_registries: {}
+
+insecure_skip_verify: true
+
+containerd_registries_mirrors:
+  - prefix: "harbor-game.beeline.kg"
+    mirrors:
+      - host: "http://harbor-game.beeline.kg"
+
+mirrors:
+  docker.io:
+    endpoint:
+      - "http://harbor-game.beeline.kg"
+
+configs:
+  harbor-game.beeline.kg:
+    auth:
+      username: "admin"
+      password: "Harbor12345"
+
+capabilities: ["pull", "resolve"]
+skip_verify: true
+image_command_tool: crictl

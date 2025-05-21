@@ -1,0 +1,18 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  creationTimestamp: null
+  name: longhorn-frontend
+  namespace: longhorn-system
+spec:
+  entryPoints: []
+  routes:
+  - kind: Rule
+    match: Host(`longhorn-frontend.kg.local`) && PathPrefix(`/`)
+    priority: 0
+    services:
+    - kind: Service
+      name: longhorn-frontend
+      port: 80

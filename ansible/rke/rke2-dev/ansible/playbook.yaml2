@@ -1,0 +1,3 @@
+- hosts: rke
+  roles:
+     - ansible-role-rke2

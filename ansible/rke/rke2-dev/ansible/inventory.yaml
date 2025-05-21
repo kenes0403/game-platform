@@ -1,0 +1,125 @@
+---
+rke:
+  vars:
+    # Deploy the cluster in HA mode
+    rke2_ha_mode: true
+    rke2_ha_mode_kubevip: true
+    rke2_ha_mode_keepalived: true
+    # rke2_cis_active: true # Set true if used hardening
+    # rke2_config:
+    #   profile: cis-1.23
+    # rke2_cis_profile: "1.23"
+    # rke2_cis_profile: "cis"
+    # rke2_kubevip_cloud_provider_enable: false
+    # rke2_disable_cloud_controller: true
+
+    # Kubernetes API and RKE2 node registration IP address. The default Address is the IPv4 of the Server/Master node.
+    # In HA mode choose a static IP which will be set as VIP in keepalived.
+    # rke2_api_ip: "{{ hostvars[groups.masters.0]['ansible_default_ipv4']['address'] }}"
+    rke2_api_ip: 10.16.230.5
+
+    rke2_tls_name:
+      - bi-mybeectrl
+      - bi-mybeework01
+      - bi-mybeework02
+      - bi-mybeework03
+      - bi-mybeework04     
+      - bi-mybeework05
+      - 10.16.230.5
+      - 10.16.230.6
+      - 10.16.230.43
+      - 10.16.230.60
+      - 10.16.230.113
+      - 10.16.230.115
+      - 10.16.230.209
+      - 10.16.230.223
+
+    # API Server destination port
+    rke2_apiserver_dest_port: 6443
+
+    # If false, server(master) node(s) will be schedulable and thus your workloads can get launched on them
+    rke2_server_taint: false
+
+    # Pre-shared secret token that other server or agent nodes will register with when connecting to the cluster
+    rke2_token: 4Jif1Oz4vopyCouawJNHz
+
+    # RKE2 version
+    rke2_version: v1.29.5+rke2r1
+
+    # URL to RKE2 repository
+    rke2_channel_url: https://update.rke2.io/v1-release/channels
+
+    # RKE2 channel
+    rke2_channel: stable
+
+    # Download Kubernetes config file to the Ansible controller
+    rke2_download_kubeconf: true
+
+    # Do not deploy packaged components and delete any deployed components
+    # Valid items: rke2-canal, rke2-coredns, rke2-ingress-nginx, rke2-kube-proxy, rke2-metrics-server
+    rke2_disable:
+      - rke2-canal
+      - rke2-kube-proxy
+      - rke2-ingress-nginx
+
+    # Path to custom manifests deployed during the RKE2 installation
+    # rke2_custom_manifests:
+    #   - manifests/longhorn.yaml
+      
+
+    # Deploy RKE2 and set the custom containerd images registries
+    rke2_custom_registry: true
+
+    # (Optional) A list of Kubernetes API server flags
+    # All flags can be found here https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver
+    # rke2_kube_apiserver_args: []
+    # Override default containerd snapshotter
+    rke2_snapshooter: overlayfs
+
+    # rke2_cni: cilium
+    rke2_cni: calico
+    
+    # default pod network range for rke2 
+    rke2_cluster_cidr:   
+      - 192.168.0.0/17  
+    
+    # default service network range for rke2 
+    rke2_service_cidr:   
+      - 192.168.128.0/17
+
+    rke2_kube_controller_manager_arg:
+      - "bind-address=0.0.0.0"
+    rke2_kubevip_enabled: true
+    rke2_kube_scheduler_arg:
+      - "bind-address=0.0.0.0"
+
+  children:
+
+    k8s_cluster:
+
+      children:
+
+        masters:
+
+          hosts:
+            bi-mybeectrl:
+              ansible_host: 10.16.230.43
+              rke2_type: server
+
+        workers:
+          hosts:
+            bi-mybeework01:
+              ansible_host: 10.16.230.60
+              rke2_type: agent
+            bi-mybeework02:
+              ansible_host: 10.16.230.113
+              rke2_type: agent
+            bi-mybeework03:
+              ansible_host: 10.16.230.115
+              rke2_type: agent
+            bi-mybeework04:
+              ansible_host: 10.16.230.209
+              rke2_type: agent
+            bi-mybeework05:
+              ansible_host: 10.16.230.223
+              rke2_type: agent

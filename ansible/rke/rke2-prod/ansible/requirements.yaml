@@ -1,0 +1,5 @@
+---
+roles:
+  - name: ansible-role-rke2
+    src: lablabs.rke2
+    version: 1.39.0
