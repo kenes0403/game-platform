@@ -25,7 +25,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: frontend
-        image: "harbor-game.beeline.kg/game-platform/platform-frontend:skymobile-test-1213678" # {"$imagepolicy": "flux-system:game-platform-kg.platform-frontend"}
+        image: "harbor-game.beeline.kg/game-platform/platform-frontend:skymobile-test-1217155" # {"$imagepolicy": "flux-system:game-platform-kg.platform-frontend"}
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
