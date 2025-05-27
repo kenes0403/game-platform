@@ -43,7 +43,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: game-crossychicken
-        image: "harbor-game.beeline.kg/web-view-games/crossychicken-kg:test-1208025" # {"$imagepolicy": "flux-system:game-platform-kg.crossychicken-kg"}
+        image: "harbor-game.beeline.kg/web-view-games/crossychicken-kg:test-1220181" # {"$imagepolicy": "flux-system:game-platform-kg.crossychicken-kg"}
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
