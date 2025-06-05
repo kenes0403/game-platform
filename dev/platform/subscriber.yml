@@ -47,7 +47,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: subscriber-service
-        image: docker-registry.kar-tel.local/qazcode-export/quizzes/subscriber-service:dev-1229795 # {"$imagepolicy": "flux-system:game-platform-kg.subscriber-service"}
+        image: harbor-game.beeline.kg/qazcode-export/quizzes/subscriber-service:test-1229921 # {"$imagepolicy": "flux-system:game-platform-kg.subscriber-service"}
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
