@@ -1,0 +1,101 @@
+# Source: application-deploy/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: subscriber-service
+  namespace: game-platform-kg
+  annotations:
+    prometheus.io/path: /actuator/prometheus
+    prometheus.io/port: "8090"
+    prometheus.io/scrape: "true"
+  labels:
+    app: subscriber-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: subscriber-service
+---
+# Source: application-deploy/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: subscriber-service
+  namespace: game-platform-kg
+  labels:
+    app: subscriber-service
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 50%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: subscriber-service
+  template:
+    metadata:
+      labels:
+        app: subscriber-service
+    spec:
+      imagePullSecrets:
+      - name: docker-registry-pull
+      containers:
+      - name: subscriber-service
+        image: docker-registry.kar-tel.local/qazcode-export/quizzes/subscriber-service:dev-1229795 # {"$imagepolicy": "flux-system:game-platform-kg.subscriber-service"}
+        imagePullPolicy: IfNotPresent
+        envFrom:
+        - configMapRef:
+            name: game-platform-kg-subscriber-service
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: 8090
+          initialDelaySeconds: 30
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 3
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: 8090
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          successThreshold: 1
+        resources:
+          limits:
+            memory: 1024Mi
+          requests:
+            memory: 700Mi
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - subscriber-service
+              topologyKey: failure-domain.beta.kubernetes.io/zone
+            weight: 100
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - subscriber-service
+            topologyKey: kubernetes.io/hostname
+

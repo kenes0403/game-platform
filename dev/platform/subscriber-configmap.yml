@@ -1,0 +1,41 @@
+apiVersion: v1
+data:
+  ADD_BLACKLIST_ROUTING_KEY: addBlackListRoutingKey
+  APP_TIMEZONE: Asia/Bishkek
+  CALLBACK_EXCHANGE: callback_exchage
+  CALLBACK_ROUTING_KEY: callback_exchage_key
+  CPA_CALLBACK_API_URL: >-
+    http://callback-service.game-platform-kg.svc.cluster.loca:8080/callback-service/api/cpa/callback
+  CPA_LOGIN: QazCode
+  CPA_PASSWORD: 5@VCE7SpsFeAJd~
+  CPA_SERVICE_ID: '99'
+  CPA_URL: https://cpa.beeline.kg:8181/partner/api/v1/partner/control
+  FLYWAY_ENABLED: 'true'
+  GENERATE_GAME_ROUTING_KEY: generateGameRoutingKey
+  MANAGEMENT_SERVER_PORT: '8090'
+  RABBIT_MQ_CALLBACK_QUEUE: callback-queue
+  RABBIT_MQ_OUR_HOST: rabbitmq-0.rabbitmq-headless.game-platform-kg.svc.k8s-dev.local
+  RABBIT_MQ_OUR_PASSWORD: Adp_1Qr3GK8XdK
+  RABBIT_MQ_OUR_PORT: '5672'
+  RABBIT_MQ_OUR_USERNAME: user
+  REMOVE_BLACKLIST_ROUTING_KEY: removeBlackListRoutingKey
+  REST_TEMPLATE_CONNECTION_TIMEOUT_IN_SECOND: '60'
+  SERVER_PORT: '8080'
+  SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT: '10000'
+  SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT: '600000'
+  SPRING_DATASOURCE_HIKARI_MAX_LIFETIME: '1800000'
+  SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: '5'
+  SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: '2'
+  SPRING_DATASOURCE_PASSWORD: xE09EfBe2wLp
+  SPRING_DATASOURCE_URL: >-
+    jdbc:postgresql://10.16.230.248:5432/game_platform_kg?ApplicationName=subscriber_service&currentSchema=subscriber_schema
+  SPRING_DATASOURCE_USERNAME: platform_user
+  SPRING_PROFILES_ACTIVE: test
+  SPRING_PROFILES_INCLUDE: kg
+  SSE_TIMEOUT_MS: '10000'
+  SUBSCRIBER_ROUTING_KEY: subscriberRoutingKey
+  SYNCHRONIZATION_EXCHANGE: exchange
+kind: ConfigMap
+metadata:
+  name: game-platform-kg-subscriber-service
+  namespace: game-platform-kg
