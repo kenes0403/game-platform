@@ -1,0 +1,98 @@
+# Source: application-deploy/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: baige3d-kyrgyzstan
+  namespace: game-platform-kg
+  labels:
+    app: baige3d-kyrgyzstan
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: baige3d-kyrgyzstan
+---
+# Source: application-deploy/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: baige3d-kyrgyzstan
+  namespace: game-platform-kg
+  labels:
+    app: baige3d-kyrgyzstan
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 50%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: baige3d-kyrgyzstan
+  template:
+    metadata:
+      labels:
+        app: baige3d-kyrgyzstan
+    spec:
+      imagePullSecrets:
+      - name: docker-registry-pull
+      containers:
+      - name: baige3d-kyrgyzstan
+        image: "harbor-game.beeline.kg/web-view-games/baige3d-kyrgyzstan:test-1207989" # {"$imagepolicy": "flux-system:game-platform-kg.baige3d-kyrgyzstan"}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        resources:
+          limits:
+            memory: 1024Mi
+          requests:
+            memory: 700Mi
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - baige3d-kyrgyzstan
+              topologyKey: failure-domain.beta.kubernetes.io/zone
+            weight: 100
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - baige3d-kyrgyzstan
+            topologyKey: kubernetes.io/hostname
+---
+# Source: application-deploy/templates/ingress.yaml
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  creationTimestamp: null
+  name: baige3d-kyrgyzstan
+  namespace: game-platform-kg
+spec:
+  entryPoints: []
+  routes:
+  - kind: Rule
+    match: Host(`kyrgyzstan-baige3d-kyrgyzstan-test.beeline.kg) && PathPrefix(`/`)
+    priority: 0
+    services:
+    - kind: Service
+      name: baige3d-kyrgyzstan
+      namespace: game-platform-kg
+      port: 8080
+

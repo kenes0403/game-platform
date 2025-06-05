@@ -1,0 +1,96 @@
+# Source: application-deploy/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: sdk
+  namespace: game-platform-kg
+  labels:
+    app: sdk
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: sdk
+---
+# Source: application-deploy/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sdk
+  namespace: game-platform-kg
+  labels:
+    app: sdk
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 50%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: sdk
+  template:
+    metadata:
+      labels:
+        app: sdk
+    spec:
+      imagePullSecrets:
+      - name: docker-registry-pull
+      containers:
+      - name: sdk
+        image: "harbor-game.beeline.kg/game-platform/platform-sdk:skymobile-test-1213739"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            memory: 126Mi
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - sdk
+              topologyKey: failure-domain.beta.kubernetes.io/zone
+            weight: 100
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - sdk
+            topologyKey: kubernetes.io/hostname
+---
+# Source: application-deploy/templates/ingress.yaml
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  name: sdk
+  namespace: game-platform-kg
+spec:
+  entryPoints: []
+  routes:
+  - kind: Rule
+    match: Host(`kyrgyzstan-game-platform-sdk-test.beeline.kg`) && PathPrefix(`/`)
+    priority: 0
+    services:
+    - kind: Service
+      name: sdk
+      namespace: game-platform-kg
+      port: 8080
