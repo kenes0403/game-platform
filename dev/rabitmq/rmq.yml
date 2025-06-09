@@ -62,7 +62,7 @@ data:
   rabbitmq.conf: |-
     ## Username and password
     default_user = user
-    default_pass = CHANGEME
+    default_pass = Adp_1Qr3GK8XdK
     ## Clustering
     cluster_formation.peer_discovery_backend  = rabbit_peer_discovery_k8s
     cluster_formation.k8s.host = kubernetes.default.svc.cluster.local
