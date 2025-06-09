@@ -11,7 +11,7 @@ data:
   LOGGING_LEVEL_ROOT: info
   MANAGEMENT_SERVER_PORT: '8090'
   RABBIT_MQ_EXCHANGE: callback_exchage
-  RABBIT_MQ_OUR_HOST: rabbitmq-0.rabbitmq-headless.game-platform-kg.svc.cluster.local
+  RABBIT_MQ_OUR_HOST: rabbitmq.game-platform-kg.svc.cluster.local
   RABBIT_MQ_OUR_PASSWORD: Adp_1Qr3GK8XdK
   RABBIT_MQ_OUR_PORT: '5672'
   RABBIT_MQ_OUR_USERNAME: user
