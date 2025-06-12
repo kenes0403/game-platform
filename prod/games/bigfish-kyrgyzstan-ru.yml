@@ -43,7 +43,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: bigfish-kyrgyzstan-ru
-        image: "harbor-game.beeline.kg/web-view-games/bigfish-kyrgyzstan-ru:test-1207988" # {"$imagepolicy": "flux-system:game-platform-kg.bigfish-kyrgyzstan-ru"}
+        image: "harbor-game.beeline.kg/web-view-games/bigfish-kyrgyzstan-ru:main-1233906"
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -74,24 +74,3 @@ spec:
                 values:
                 - bigfish-kyrgyzstan-ru
             topologyKey: kubernetes.io/hostname
----
-# Source: application-deploy/templates/ingress.yaml
-apiVersion: traefik.io/v1alpha1
-kind: IngressRoute
-metadata:
-  annotations:
-    kubernetes.io/ingress.class: traefik
-  creationTimestamp: null
-  name: bigfish-kyrgyzstan-ru
-  namespace: game-platform-kg
-spec:
-  entryPoints: []
-  routes:
-  - kind: Rule
-    match: Host(`kyrgyzstan-bigfish-kyrgyzstan-ru-test.beeline.kg`) && PathPrefix(`/`)
-    priority: 0
-    services:
-    - kind: Service
-      name: bigfish-kyrgyzstan-ru
-      namespace: game-platform-kg
-      port: 8080

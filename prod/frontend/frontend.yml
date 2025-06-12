@@ -25,7 +25,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: frontend
-        image: "harbor-game.beeline.kg/game-platform/platform-frontend:skymobile-test-1217155" # {"$imagepolicy": "flux-system:game-platform-kg.platform-frontend"}
+        image: "harbor-game.beeline.kg/game-platform/platform-frontend:skymobile-main-1233898"
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -87,7 +87,7 @@ spec:
   entryPoints: []
   routes:
   - kind: Rule
-    match: Host(`kyrgyzstan-game-platform-front-test.beeline.kg`) && PathPrefix(`/`)
+    match: Host(`gaming.beeline.kg`) && PathPrefix(`/`)
     priority: 0
     services:
     - kind: Service
@@ -95,7 +95,7 @@ spec:
       namespace: game-platform-kg
       port: 8080
   - kind: Rule
-    match: Host(`kyrgyzstan-game-platform-front-test.beeline.kg`) && PathPrefix(`/api`)
+    match: Host(`gaming.beeline.kg`) && PathPrefix(`/api`)
     priority: 0
     services:
     - kind: Service

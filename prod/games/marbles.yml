@@ -43,7 +43,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: game-marbles
-        image: "harbor-game.beeline.kg/web-view-games/marbles-kg:test-1208026" # {"$imagepolicy": "flux-system:game-platform-kg.marbles-kg"}
+        image: "harbor-game.beeline.kg/web-view-games/marbles-kg:main-1233918"
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -74,24 +74,3 @@ spec:
                 values:
                 - game-marbles
             topologyKey: kubernetes.io/hostname
----
-# Source: application-deploy/templates/ingress.yaml
-apiVersion: traefik.io/v1alpha1
-kind: IngressRoute
-metadata:
-  annotations:
-    kubernetes.io/ingress.class: traefik
-  creationTimestamp: null
-  name: game-marbles
-  namespace: game-platform-kg
-spec:
-  entryPoints: []
-  routes:
-  - kind: Rule
-    match: Host(`kyrgyzstan-game-marbles-test.beeline.kg`) && PathPrefix(`/`)
-    priority: 0
-    services:
-    - kind: Service
-      name: game-marbles
-      namespace: game-platform-kg
-      port: 8080

@@ -43,7 +43,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: baige3d-kyrgyzstan
-        image: "harbor-game.beeline.kg/web-view-games/baige3d-kyrgyzstan:test-1207989" # {"$imagepolicy": "flux-system:game-platform-kg.baige3d-kyrgyzstan"}
+        image: "harbor-game.beeline.kg/web-view-games/baige3d-kyrgyzstan:main-1233907"
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -74,25 +74,4 @@ spec:
                 values:
                 - baige3d-kyrgyzstan
             topologyKey: kubernetes.io/hostname
----
-# Source: application-deploy/templates/ingress.yaml
-apiVersion: traefik.io/v1alpha1
-kind: IngressRoute
-metadata:
-  annotations:
-    kubernetes.io/ingress.class: traefik
-  creationTimestamp: null
-  name: baige3d-kyrgyzstan
-  namespace: game-platform-kg
-spec:
-  entryPoints: []
-  routes:
-  - kind: Rule
-    match: Host(`kyrgyzstan-baige3d-kyrgyzstan-test.beeline.kg) && PathPrefix(`/`)
-    priority: 0
-    services:
-    - kind: Service
-      name: baige3d-kyrgyzstan
-      namespace: game-platform-kg
-      port: 8080
 

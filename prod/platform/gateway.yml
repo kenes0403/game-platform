@@ -29,7 +29,7 @@ spec:
           name: gateway
       containers:
       - name: gateway
-        image: "harbor-game.beeline.kg/qazcode-export/game-platform/gateway:dev-1184295"
+        image: "harbor-game.beeline.kg/qazcode-export/game-platform/gateway:main-1233903"
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080

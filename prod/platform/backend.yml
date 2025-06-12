@@ -25,7 +25,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: backend
-        image: "harbor-game.beeline.kg/qazcode-export/game-platform/platform-backend:test-skymobile-1211123" # {"$imagepolicy": "flux-system:game-platform-kg.platform-backend"}
+        image: "harbor-game.beeline.kg/qazcode-export/game-platform/platform-backend:test-skymobile-1211123"
         imagePullPolicy: IfNotPresent
         env:
         - name: "SERVER_PORT"
@@ -33,7 +33,7 @@ spec:
         - name: "MANAGEMENT_SERVER_PORT"
           value: "8090"
         - name: "SPRING_PROFILES_ACTIVE"
-          value: "dev"
+          value: "prod"
         envFrom:
         - secretRef:
             name: backend
@@ -104,23 +104,3 @@ spec:
     name: http
   selector:
     app: backend
----
-# Source: application-deploy/templates/ingress.yaml
-apiVersion: traefik.io/v1alpha1
-kind: IngressRoute
-metadata:
-  annotations:
-    kubernetes.io/ingress.class: traefik
-  name: backend
-  namespace: game-platform-kg
-spec:
-  entryPoints: []
-  routes:
-  - kind: Rule
-    match: Host(`kyrgyzstan-game-platform-backend-test.beeline.kg`) && PathPrefix(`/`)
-    priority: 0
-    services:
-    - kind: Service
-      name: backend
-      namespace: game-platform-kg
-      port: 8080

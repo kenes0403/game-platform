@@ -43,7 +43,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: sdk
-        image: "harbor-game.beeline.kg/game-platform/platform-sdk:skymobile-test-1213739"
+        image: "harbor-game.beeline.kg/game-platform/platform-sdk:skymobile-main-123390"
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -74,23 +74,3 @@ spec:
                 values:
                 - sdk
             topologyKey: kubernetes.io/hostname
----
-# Source: application-deploy/templates/ingress.yaml
-apiVersion: traefik.io/v1alpha1
-kind: IngressRoute
-metadata:
-  annotations:
-    kubernetes.io/ingress.class: traefik
-  name: sdk
-  namespace: game-platform-kg
-spec:
-  entryPoints: []
-  routes:
-  - kind: Rule
-    match: Host(`kyrgyzstan-game-platform-sdk-test.beeline.kg`) && PathPrefix(`/`)
-    priority: 0
-    services:
-    - kind: Service
-      name: sdk
-      namespace: game-platform-kg
-      port: 8080

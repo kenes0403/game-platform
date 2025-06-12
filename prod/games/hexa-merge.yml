@@ -43,7 +43,7 @@ spec:
       - name: docker-registry-pull
       containers:
       - name: game-hexa-merge
-        image: "harbor-game.beeline.kg/web-view-games/hexa-merge-kg:test-1218289" # {"$imagepolicy": "flux-system:game-platform-kg.hexa-merge-kg"}
+        image: "harbor-game.beeline.kg/web-view-games/hexa-merge-kg:main-1233915"
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -74,24 +74,3 @@ spec:
                 values:
                 - game-hexa-merge
             topologyKey: kubernetes.io/hostname
----
-# Source: application-deploy/templates/ingress.yaml
-apiVersion: traefik.io/v1alpha1
-kind: IngressRoute
-metadata:
-  annotations:
-    kubernetes.io/ingress.class: traefik
-  creationTimestamp: null
-  name: game-hexa-merge
-  namespace: game-platform-kg
-spec:
-  entryPoints: []
-  routes:
-  - kind: Rule
-    match: Host(`kyrgyzstan-game-hexa-merge-test.beeline.kg`) && PathPrefix(`/`)
-    priority: 0
-    services:
-    - kind: Service
-      name: game-hexa-merge
-      namespace: game-platform-kg
-      port: 8080
